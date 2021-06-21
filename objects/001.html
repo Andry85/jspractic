@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Objects</title>
+</head>
+<body>
+
+
+<script>
+
+    let city = {
+        people: 350000,
+        name: "Vinnutsia",
+    };
+
+    let cityRegion = Object.create(city);
+
+    console.log(cityRegion.name);
+    console.log(cityRegion["name"]);
+
+    function addStock(portfolio, stockname, shares) {
+        portfolio[stockname] = shares;
+    }
+
+    const portfolio = {};
+
+    for (let i = 0; i < 3; i++) {
+        let stockname = prompt('Введити название компании');
+        let shares = prompt('Введити количество акций');
+        addStock(portfolio, stockname, shares);
+        console.log(portfolio);
+    }
+
+    function computeValue(portfolio) {
+        let total = 0.0;
+
+        for (let stock in portfolio) {
+            let shares = portfolio[stock];
+            total = total + parseInt(shares);
+        }
+
+        return total;
+    }
+
+    let result = computeValue(portfolio);
+    
+    console.log('result', result);
+
+
+    
+
+    
+
+    
+
+
+
+
+    
+</script>
+
+</body>
+</html>
