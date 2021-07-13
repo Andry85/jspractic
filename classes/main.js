@@ -1,3 +1,6 @@
+"use strict";
+
+
 function Range(from, to) {
   this.from = from;
   this.to = to;
@@ -256,3 +259,134 @@ let field_2 = new BasketballField('green', 100, 5);
 console.log(field_2.toString());
 console.log(field_2.area());
 
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+
+  get area() {
+    return this.calcArea();
+  }
+
+  calcArea() {
+    return this.height * this.width;
+  }
+}
+
+const square = new Rectangle(10, 10);
+
+console.log(square.area); // 100
+
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  static displayName = "Точка";
+  static distance(a, b) {
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+
+    return Math.hypot(dx, dy);
+  }
+}
+
+const p1 = new Point(5, 5);
+const p2 = new Point(10, 10);
+p1.displayName; //undefined
+p1.distance;    //undefined
+p2.displayName; //undefined
+p2.distance;    //undefined
+
+console.log(Point.displayName);      // "Точка"
+console.log(Point.distance(p1, p2)); // 7.0710678118654755
+
+
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} издаёт звук.`);
+  }
+}
+
+class Dog extends Animal {
+  constructor(name) {
+    super(name); // вызывает конструктор super класса и передаёт параметр name
+  }
+
+  speak() {
+    console.log(`${this.name} лает.`);
+  }
+}
+
+let d = new Dog('Митци');
+d.speak(); // Митци лает
+
+
+
+class School {
+  constructor(name, pupils) {
+    this.name = name;
+    this.pupils = pupils;
+  }
+
+  beginLearning() {
+    console.log(`${this.name} starts learning at september`);
+  }
+
+  get nameOfSchool() {
+    return `${this.name}`;
+  }
+
+  set nameOfSchool(newName) {
+    this.name = newName;
+  }
+
+  static welcomeSchool() {
+    return `${this.name} welcome!`;
+  }
+
+}
+
+let sokilSchool = new School('Barvinok', 255);
+console.log(sokilSchool.nameOfSchool);
+sokilSchool.nameOfSchool = 'Pavlin';
+console.log(sokilSchool.nameOfSchool);
+
+console.log(School.welcomeSchool());
+
+console.log(sokilSchool.__proto__);
+console.log(School.prototype);
+
+
+class FierslevelSchool extends School {
+
+  constructor(established, ...args) {
+    super(established, ...args);
+    this.established = established;
+  }
+
+  beginLearning() {
+    super.beginLearning();
+    console.log(`i am colled from FierslevelSchool. The school has been  established ${this.established}`);
+  }
+}
+
+
+let BilanySchool = new FierslevelSchool(1968, 'Bilany', 20);
+console.log('BilanySchool.beginLearning', BilanySchool.beginLearning());
+
+console.log(BilanySchool);
+console.log('FierslevelSchool', FierslevelSchool);
+
+console.log('FierslevelSchool.prototype', FierslevelSchool.prototype);
+
+console.log('FierslevelSchool.prototype.__proto__', FierslevelSchool.prototype.__proto__);
+
+console.log('FierslevelSchool.prototype.__proto__ == School.prototype', FierslevelSchool.prototype.__proto__ == School.prototype);
