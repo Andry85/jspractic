@@ -259,24 +259,24 @@ let field_2 = new BasketballField('green', 100, 5);
 console.log(field_2.toString());
 console.log(field_2.area());
 
-class Rectangle {
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
-  }
+// class Rectangle {
+//   constructor(height, width) {
+//     this.height = height;
+//     this.width = width;
+//   }
 
-  get area() {
-    return this.calcArea();
-  }
+//   get area() {
+//     return this.calcArea();
+//   }
 
-  calcArea() {
-    return this.height * this.width;
-  }
-}
+//   calcArea() {
+//     return this.height * this.width;
+//   }
+// }
 
-const square = new Rectangle(10, 10);
+// const square = new Rectangle(10, 10);
 
-console.log(square.area); // 100
+// console.log(square.area); // 100
 
 
 class Point {
@@ -390,3 +390,189 @@ console.log('FierslevelSchool.prototype', FierslevelSchool.prototype);
 console.log('FierslevelSchool.prototype.__proto__', FierslevelSchool.prototype.__proto__);
 
 console.log('FierslevelSchool.prototype.__proto__ == School.prototype', FierslevelSchool.prototype.__proto__ == School.prototype);
+
+
+
+class Menu {
+  constructor(title, items, witdh) {
+    this.title = title;
+    this.items = items;
+    this.width = witdh;
+  }
+
+  render() {
+    let el = document.createElement('ul');
+    for (let item of this.items) {
+      let li = document.createElement('li');
+      li.append(item);
+      el.append(li);
+    }
+    let body = document.getElementsByTagName('body')[0];
+    body.append(el);
+
+  }
+
+
+}
+
+let myMenu = new Menu('Sidebar menu', ['item 1', 'item 2', 'item 3'], '500px');
+myMenu.render();
+
+
+class PersonClass {
+
+  // еквівалент конструктора PersonType
+  constructor(name) {
+      this.name = name;
+  }
+
+  // еквівалент PersonType.prototype.sayName
+  sayName() {
+      console.log(this.name);
+  }
+}
+
+let person = new PersonClass("Nicholas");
+person.sayName();   // виводить "Nicholas"
+
+console.log(person instanceof PersonClass);     // true
+console.log(person instanceof Object);          // true
+
+console.log(typeof PersonClass);                    // "function"
+console.log(typeof PersonClass.prototype.sayName);  // "function"
+
+
+function createObject(classDef) {
+  return new classDef();
+}
+
+let obj = createObject(class {
+
+  sayHi() {
+      console.log("Hi!");
+  }
+});
+
+console.log(obj.sayHi());        // "Hi!"
+
+
+let personA = new class {
+
+  constructor(name) {
+      this.name = name;
+  }
+
+  sayName() {
+      console.log(this.name);
+  }
+
+}("Nicholas");
+
+console.log(personA.sayName());  
+
+
+class CustomHTMLElement {
+
+  constructor(element) {
+      this.element = element;
+  }
+
+  get html() {
+      return this.element.innerHTML;
+  }
+
+  set html(value) {
+      this.element.innerHTML = value;
+  }
+}
+
+var descriptor = Object.getOwnPropertyDescriptor(CustomHTMLElement.prototype, "html");
+console.log("get" in descriptor);   // true
+console.log("set" in descriptor);   // true
+console.log(descriptor.enumerable); // false
+
+
+
+class MYPersonClass {
+
+  // еквівалент конструктору PersonType
+  constructor(name) {
+      this.name = name;
+  }
+
+  // еквівалент PersonType.prototype.sayName
+  sayName() {
+      console.log(this.name);
+  }
+
+  // еквівалент PersonType.create
+  static create(name) {
+      return new MYPersonClass(name);
+  }
+}
+
+let personOleg = MYPersonClass.create("Oleg");
+
+console.log(personOleg.sayName());
+
+
+
+function RectangleBig(length, width) {
+  this.length = length;
+  this.width = width;
+}
+
+RectangleBig.prototype.getArea = function() {
+  return this.length * this.width;
+};
+
+function SquareBig(length) {
+  RectangleBig.call(this, length, length);
+  console.log(this);
+}
+
+SquareBig.prototype = Object.create(RectangleBig.prototype, {
+  constructor: {
+      value:SquareBig,
+      enumerable: true,
+      writable: true,
+      configurable: true
+  }
+});
+
+var squareMy = new SquareBig(3);
+
+console.log(squareMy.getArea());              // 9
+console.log(squareMy instanceof SquareBig);      // true
+console.log(squareMy instanceof RectangleBig);   // true
+
+
+let SerializableMixin = {
+  serialize() {
+      return JSON.stringify(this);
+  }
+};
+
+let AreaMixin = {
+  getArea() {
+      return this.length * this.width;
+  }
+};
+
+function mixin(...mixins) {
+  var base = function() {};
+  Object.assign(base.prototype, ...mixins);
+  return base;
+}
+
+class Square extends mixin(AreaMixin, SerializableMixin) {
+  constructor(length) {
+      super();
+      this.length = length;
+      this.width = length;
+  }
+}
+
+var x = new Square(3);
+console.log(x.getArea());               // 9
+console.log(x.serialize());
