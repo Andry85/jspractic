@@ -33,7 +33,12 @@ module.exports = {
           }
         ]
     },
-    plugins: [new HtmlWebpackPlugin()],
+    plugins: [new HtmlWebpackPlugin(),
+      new HtmlWebpackPlugin({  // Also generate a test.html
+        filename: 'file.html',
+        template: 'src/file.html'
+      })
+    ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         compress: true,
