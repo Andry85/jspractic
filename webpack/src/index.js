@@ -146,8 +146,19 @@ for (var i = 0; i < int16View.length; i++) {
 }
 
 const inputElement = document.getElementById("input");
-inputElement.addEventListener("change", handleFiles, false);
-function handleFiles() {
-  const fileList = this.files; /* now you can work with the file list */
-  console.log(fileList[0]);
+
+if (inputElement) {
+  inputElement.addEventListener("change", handleFiles, false);
+  function handleFiles() {
+    const fileList = this.files; /* now you can work with the file list */
+    console.log(fileList[0]);
+  }
 }
+
+
+console.log(regexp.showstrReg);
+console.log(regexp.replaceLet);
+console.log(regexp.testLet);
+
+
+
