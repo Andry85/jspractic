@@ -130,3 +130,8 @@ let curriedSum = curry(sum);
 // console.log( curriedSum(1, 2, 3) ); // 6, всё ещё можно вызывать нормально
 // console.log( curriedSum(1)(2,3) ); // 6, каррирование первого аргумента
 console.log( curriedSum(1)(2)(3) ); // 6, каррирование всех аргументов
+
+
+function globalFunc() {
+  console.log('I am global function');
+}

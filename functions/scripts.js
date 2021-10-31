@@ -1,0 +1,3 @@
+globalFunc();
+
+console.log(window);
