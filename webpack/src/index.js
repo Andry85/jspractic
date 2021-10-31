@@ -1,9 +1,14 @@
+import "./styles/main.css";
+
 import {PIM, degree, a as A, GoHome} from './module.js';
 import {pete} from './1.js';
 import {changedName} from './2.js';
 import * as see from './see.js';
 import {default as User, sayHi} from './user.js';
 import * as regexp from './regexp.js';
+import {dom} from './dom';
+
+
 
 console.log(PIM);
 
@@ -161,4 +166,6 @@ console.log(regexp.replaceLet);
 console.log(regexp.testLet);
 
 
+
+dom();
 

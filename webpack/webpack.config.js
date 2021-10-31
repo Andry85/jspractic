@@ -13,12 +13,8 @@ module.exports = {
           {
             test: /\.css$/,
             use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  modules: true
-                }
-              }
+              'style-loader',
+              'css-loader'
             ]
           },
           {
@@ -33,10 +29,15 @@ module.exports = {
           }
         ]
     },
-    plugins: [new HtmlWebpackPlugin(),
+    plugins: [
+      new HtmlWebpackPlugin(),
       new HtmlWebpackPlugin({  // Also generate a test.html
         filename: 'file.html',
-        template: 'src/file.html'
+        template: 'src/pages/file.html'
+      }),
+      new HtmlWebpackPlugin({  // Also generate a test.html
+        filename: 'dom.html',
+        template: 'src/pages/dom.html'
       })
     ],
     devServer: {
